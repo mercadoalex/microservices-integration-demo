@@ -1,4 +1,4 @@
-<soapui-project>
+<soapui-project xmlns="http://eviware.com/soapui/config">
     <name>Microservices Integration Demo</name>
     <settings>
         <setting>
@@ -18,7 +18,7 @@
                             <type>REST</type>
                             <request>
                                 <method>GET</method>
-                                <url>http://localhost:3000/service-a/endpoint</url>
+                                <url>http://localhost:3000/api/service-a/endpoint1</url>
                                 <headers>
                                     <header>
                                         <name>Content-Type</name>
@@ -31,7 +31,41 @@
                                     <type>ResponseAssertion</type>
                                     <property>Response</property>
                                     <operator>Contains</operator>
-                                    <value>expectedValue</value>
+                                    <value>Response from Service A - Endpoint 1</value>
+                                </assertion>
+                            </assertions>
+                        </step>
+                    </steps>
+                </testCase>
+                <testCase>
+                    <name>TestServiceAEndpoint2</name>
+                    <steps>
+                        <step>
+                            <name>RequestServiceAEndpoint2</name>
+                            <type>REST</type>
+                            <request>
+                                <method>POST</method>
+                                <url>http://localhost:3000/api/service-a/endpoint2</url>
+                                <headers>
+                                    <header>
+                                        <name>Content-Type</name>
+                                        <value>application/json</value>
+                                    </header>
+                                </headers>
+                                <body>
+                                    <json>
+                                        {
+                                            "sample": "data"
+                                        }
+                                    </json>
+                                </body>
+                            </request>
+                            <assertions>
+                                <assertion>
+                                    <type>ResponseAssertion</type>
+                                    <property>Response</property>
+                                    <operator>Contains</operator>
+                                    <value>Data received in Service A - Endpoint 2</value>
                                 </assertion>
                             </assertions>
                         </step>
@@ -49,28 +83,21 @@
                             <name>RequestServiceB</name>
                             <type>REST</type>
                             <request>
-                                <method>POST</method>
-                                <url>http://localhost:3000/service-b/endpoint</url>
+                                <method>GET</method>
+                                <url>http://localhost:3001/service-b/endpoint</url>
                                 <headers>
                                     <header>
                                         <name>Content-Type</name>
                                         <value>application/json</value>
                                     </header>
                                 </headers>
-                                <body>
-                                    <json>
-                                        {
-                                            "key": "value"
-                                        }
-                                    </json>
-                                </body>
                             </request>
                             <assertions>
                                 <assertion>
                                     <type>ResponseAssertion</type>
                                     <property>Response</property>
-                                    <operator>Equals</operator>
-                                    <value>expectedResponse</value>
+                                    <operator>Contains</operator>
+                                    <value>Hello from Service B!</value>
                                 </assertion>
                             </assertions>
                         </step>
