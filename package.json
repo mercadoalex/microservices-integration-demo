@@ -1,0 +1,29 @@
+{
+  "name": "microservices-integration-demo",
+  "version": "1.0.0",
+  "description": "A demo project to showcase the integration of microservices endpoints with SOAPUI and GitHub Actions.",
+  "main": "src/service-a/app.js",
+  "scripts": {
+    "start": "node src/service-a/app.js",
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"Building the project...\""
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/microservices-integration-demo.git"
+  },
+  "keywords": [
+    "microservices",
+    "soapui",
+    "github-actions"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}

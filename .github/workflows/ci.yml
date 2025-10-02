@@ -1,0 +1,43 @@
+name: CI with SOAPUI Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./src
+
+      - name: Download and install SOAPUI
+        run: |
+          wget https://github.com/SmartBear/soapui/releases/download/v5.7.0/SoapUI-5.7.0-linux-bin.tar.gz
+          tar -xzf SoapUI-5.7.0-linux-bin.tar.gz
+          mv SoapUI-5.7.0 /opt/SoapUI
+        shell: bash
+
+      - name: Run tests
+        run: npm test
+        working-directory: ./src
+
+      - name: Run SOAPUI tests
+        run: /opt/SoapUI/bin/testrunner.sh src/tests/soapui-project.xml
+        env:
+          SOAPUI_HOME: /opt/SoapUI
