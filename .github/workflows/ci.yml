@@ -38,6 +38,6 @@ jobs:
         working-directory: ./src
 
       - name: Run SOAPUI tests
-        run: /opt/SoapUI/bin/testrunner.sh src/tests/soapui-project.xml
+        run: /opt/SoapUI/bin/testrunner.sh -r src/tests/soapui-project.xml
         env:
           SOAPUI_HOME: /opt/SoapUI
